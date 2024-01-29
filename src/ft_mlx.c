@@ -1,29 +1,31 @@
 #include "../inc/ft_mlx.h"
 #include "../inc/constance.h"
 
+extern t_player	player;
+
 int	key_release(int keycode)
 {
 	if (keycode == LEFT_ARROW || keycode == LINUX_A)
-		t_player.turn_direction = 0;
+		player.turn_direction = 0;
 	else if (keycode == RIGHT_ARROW || keycode == LINUX_D)
-		t_player.turn_direction = 0;
+		player.turn_direction = 0;
 	else if (keycode == UP_ARROW || keycode == LINUX_W)
-		t_player.walk_direction = 0;
+		player.walk_direction = 0;
 	else if (keycode == S_KEY || keycode == LINUX_S)
-		t_player.walk_direction = 0;
+		player.walk_direction = 0;
 	return (0);
 }
 
 int	key_hook(int keycode, t_game *game)
 {
 	if (keycode == LEFT_ARROW || keycode == LINUX_A)
-		t_player.turn_direction = -1;
+		player.turn_direction = -1;
 	else if (keycode == RIGHT_ARROW || keycode == LINUX_D)
-		t_player.turn_direction = 1;
+		player.turn_direction = 1;
 	else if (keycode == UP_ARROW || keycode == LINUX_W)
-		t_player.walk_direction = 1;
+		player.walk_direction = 1;
 	else if (keycode == S_KEY || keycode == LINUX_S)
-		t_player.walk_direction = -1;
+		player.walk_direction = -1;
 	else if (keycode == ESC || keycode == LINUX_ESC)
 		safe_exit(game);
 	// render_player(game);
