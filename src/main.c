@@ -6,23 +6,25 @@
 #include "../inc/ray.h"
 #include "../inc/constance.h"
 
-void	init_t_player()
+t_player player;
+
+void	init_player()
 {
-	t_player.x = WINDOW_WIDTH / 2;
-	t_player.y = WINDOW_HEIGHT / 2;
-	t_player.width = 1;
-	t_player.height = 1;
-	t_player.turnDirection = 0;
-	t_player.walkDirection = 0;
-	t_player.rotationAngle = M_PI / 2;
-	t_player.walkSpeed = 10;
-	t_player.turnSpeed = M_PI / 180 * t_player.walkSpeed;
+	player.x = WINDOW_WIDTH / 2;
+	player.y = WINDOW_HEIGHT / 2;
+	player.width = 1;
+	player.height = 1;
+	player.turnDirection = 0;
+	player.walkDirection = 0;
+	player.rotationAngle = M_PI / 2;
+	player.walkSpeed = 10;
+	player.turnSpeed = M_PI / 180 * player.walkSpeed;
 }
 
 void	setup(char **argv1)
 {
 	// Add wall textrues here?
-	init_t_player();
+	init_player();
 	(void)argv1;
 //	init_texture_and_map(argv1);
 }
@@ -42,16 +44,16 @@ void	movePlayer(t_game *game)
 {
 	if (!game)
 		return ;
-	t_player.rotationAngle += t_player.turnDirection * t_player.turnSpeed;
-	float moveStep = t_player.walkDirection * t_player.walkSpeed;
-	float newPlayerX = t_player.x + cos(t_player.rotationAngle) * moveStep;
-	float newPlayerY = t_player.y + sin(t_player.rotationAngle) * moveStep;
+	player.rotationAngle += player.turnDirection * player.turnSpeed;
+	float moveStep = player.walkDirection * player.walkSpeed;
+	float newPlayerX = player.x + cos(player.rotationAngle) * moveStep;
+	float newPlayerY = player.y + sin(player.rotationAngle) * moveStep;
 
 
 	if (mapContentAt(newPlayerX, newPlayerY) != 1)
 	{
-		t_player.x = newPlayerX;
-		t_player.y = newPlayerY;
+		player.x = newPlayerX;
+		player.y = newPlayerY;
 	}
 }
 

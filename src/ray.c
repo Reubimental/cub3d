@@ -5,6 +5,8 @@
 #include "../inc/constance.h"
 #include "../inc/map.h"
 
+extern t_player player;
+
 ray_t	rays[NUM_RAYS];
 
 int	isRayFacingDown(float angle)
@@ -53,11 +55,11 @@ void cast_one_ray(float rayAngle, int stripId)
 	int horzWallContent = 0;
 
 	// Find the y-coordinate of the closet horizontal grid intersection.  
-	yintercept = floor(t_player.y / TILE_SIZE) * TILE_SIZE;
+	yintercept = floor(player.y / TILE_SIZE) * TILE_SIZE;
 	yintercept += (isRayFacingDown(rayAngle) ? TILE_SIZE : 0);
 
 	// Find the x coordinate of the closest horizontal grid intersection
-	xintercept = t_player.x + (yintercept - t_player.y) / tan(rayAngle);
+	xintercept = player.x + (yintercept - player.y) / tan(rayAngle);
 
 	// Calculate the increment for xstep and ystep.
 	ystep = TILE_SIZE;
@@ -102,11 +104,11 @@ void cast_one_ray(float rayAngle, int stripId)
 	int vertWallContent = 0;
 
 	// Find the x-coordinate of the closet horizontal grid intersection.  
-	xintercept = floor(t_player.x / TILE_SIZE) * TILE_SIZE;
+	xintercept = floor(player.x / TILE_SIZE) * TILE_SIZE;
 	xintercept += (isRayFacingRight(rayAngle) ? TILE_SIZE : 0);
 
 	// Find the y coordinate of the closest horizontal grid intersection
-	yintercept = t_player.y + (xintercept - t_player.x) * tan(rayAngle);
+	yintercept = player.y + (xintercept - player.x) * tan(rayAngle);
 
 	// Calculate the increment for ystep and xstep.
 	xstep = TILE_SIZE;
@@ -144,11 +146,11 @@ void cast_one_ray(float rayAngle, int stripId)
 	
 	// Calculate both horizontal and vertical distances and choose the smaller.
 	float horzHitDistance = (foundHorzWallHit
-		? distanceBetweenPoints(t_player.x, t_player.y, horzWallHitX, horzWallHitY)
+		? distanceBetweenPoints(player.x, player.y, horzWallHitX, horzWallHitY)
 		: FLT_MAX);
 
 	float vertHitDistance = (foundVertWallHit
-		? distanceBetweenPoints(t_player.x, t_player.y, vertWallHitX, vertWallHitY)
+		? distanceBetweenPoints(player.x, player.y, vertWallHitX, vertWallHitY)
 		: FLT_MAX);
 
 	// Only store the smallest of the distances and x and y. 
@@ -177,7 +179,7 @@ void cast_one_ray(float rayAngle, int stripId)
 
 void castAllRays(void)
 {
-	float rayAngle = t_player.rotationAngle - FOV_ANGLE / 2;
+	float rayAngle = player.rotationAngle - FOV_ANGLE / 2;
 	for (int stripId = 0; stripId < NUM_RAYS; stripId++)
 	{
 		// printf("FOV: %f StripId: %d RayAngle: %f\n", FOV_ANGLE, stripId, rayAngle);
@@ -192,8 +194,8 @@ void	renderRays(t_game *game)
 	for (int i = 0; i < NUM_RAYS; i++)
 	{
 		t_line line = {
-			t_player.x * MINIMAP_SCALE,
-			t_player.y * MINIMAP_SCALE,
+			player.x * MINIMAP_SCALE,
+			player.y * MINIMAP_SCALE,
 			rays[i].wallHitX * MINIMAP_SCALE,
 			rays[i].wallHitY * MINIMAP_SCALE,
 			0x00FFC8D7

@@ -4,22 +4,24 @@
 #include "../inc/cub3d.h"
 #include "../inc/ray.h"
 
+extern t_player player;
+
 void	renderPlayer(t_game *game)
 {
 	t_rectangle playerRect = {
-		t_player.x * MINIMAP_SCALE,
-		t_player.y * MINIMAP_SCALE,
-		t_player.width * MINIMAP_SCALE,
-		t_player.height * MINIMAP_SCALE,
+		player.x * MINIMAP_SCALE,
+		player.y * MINIMAP_SCALE,
+		player.width * MINIMAP_SCALE,
+		player.height * MINIMAP_SCALE,
 		0x00E0B0FF
 	};
 	drawRect(game, &playerRect);
 
 	t_line playerLine = {
-		t_player.x * MINIMAP_SCALE,
-		t_player.y * MINIMAP_SCALE,
-		(t_player.x + cos(t_player.rotationAngle) * 40) * MINIMAP_SCALE,
-		(t_player.y + sin(t_player.rotationAngle) * 40) * MINIMAP_SCALE,
+		player.x * MINIMAP_SCALE,
+		player.y * MINIMAP_SCALE,
+		(player.x + cos(player.rotationAngle) * 40) * MINIMAP_SCALE,
+		(player.y + sin(player.rotationAngle) * 40) * MINIMAP_SCALE,
 		0x00E0B0FF
 	};
 	drawLine(game, &playerLine);
@@ -52,7 +54,7 @@ void	generate3DProjection(t_game *game)
 	drawCeling(game);
 	for (int i = 0; i < NUM_RAYS; i++)
 	{
-		float correctedDistance = rays[i].distance * cos(rays[i].rayAngle - t_player.rotationAngle);
+		float correctedDistance = rays[i].distance * cos(rays[i].rayAngle - player.rotationAngle);
 		float distanceProjPlane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
 		float projectedWallHeight = (TILE_SIZE / correctedDistance) * distanceProjPlane;
 		int wallStripHeight = (int)projectedWallHeight;

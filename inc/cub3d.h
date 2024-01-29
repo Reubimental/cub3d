@@ -8,7 +8,7 @@
 # include "constance.h"
 
 
-struct s_player
+typedef struct s_player
 {
 	float x;
 	float y;

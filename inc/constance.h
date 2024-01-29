@@ -27,6 +27,16 @@
 # define	LEFT_ARROW 0
 # define	RIGHT_ARROW 2
 # define	ESC 53
+# define    WIN_A 97
+# define    WIN_S 115
+# define    WIN_D 100
+# define    WIN_W 119
+# define    WIN_ESC 65307
+# define    LINUX_A 28
+# define    LINUX_S 30
+# define    LINUX_D 31
+# define    LINUX_W 17
+# define    LINUX_ESC 1
 
 # define	NORTH 1
 # define	EAST 2

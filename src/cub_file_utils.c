@@ -13,11 +13,11 @@ bool	is_white_space(char c)
 
 void	find_first_char(char *current_line, int *i)
 {
-	int i = 0;
-	while (is_white_space(current_line[*i]))
-		*i++;
-	if (current_line[*i] == '\0')
-		*i = -1;
+	int	j = *i;
+	while (is_white_space(current_line[j]))
+		j++;
+	if (current_line[j] == '\0')
+		j = -1;
 }
 
 char	*remove_tail_whitespace(char *in_string)
@@ -32,6 +32,7 @@ char	*remove_tail_whitespace(char *in_string)
 		{
 			len--;
 		}
+		temp = malloc(ft_strlen(in_string) - len + 1);
 		ft_strlcpy(temp, in_string, ft_strlen(in_string) - len);
 		return (temp);
 	}
@@ -61,7 +62,7 @@ int	open_cub_file(char *file_name)
 	if (file_name == NULL)
 		return (-1);
 	fd = open(file_name, O_RDONLY);
-	if (fd == -1 || fd == NULL)
+	if (fd == -1 || fd == 0)
 		return (-1);
 	return (fd);
 }

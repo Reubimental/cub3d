@@ -1,30 +1,32 @@
 #include "../inc/ft_mlx.h"
 #include "../inc/constance.h"
 
+extern t_player player;
+
 int	key_release(int keycode)
 {
-	if (keycode == LEFT_ARROW)
-		t_player.turnDirection = 0;
-	else if (keycode == RIGHT_ARROW)
-		t_player.turnDirection = 0;
-	else if (keycode == UP_ARROW)
-		t_player.walkDirection = 0;
-	else if (keycode == S_KEY)
-		t_player.walkDirection = 0;
+	if (keycode == LEFT_ARROW || keycode == LINUX_A || keycode == WIN_A)
+		player.turnDirection = 0;
+	else if (keycode == RIGHT_ARROW || keycode == LINUX_D || keycode == WIN_D)
+		player.turnDirection = 0;
+	else if (keycode == UP_ARROW || keycode == LINUX_W || keycode == WIN_W)
+		player.walkDirection = 0;
+	else if (keycode == S_KEY || keycode == LINUX_S || keycode == WIN_S)
+		player.walkDirection = 0;
 	return (0);
 }
 
 int	key_hook(int keycode, t_game *game)
 {
-	if (keycode == LEFT_ARROW)
-		t_player.turnDirection = -1;
-	else if (keycode == RIGHT_ARROW)
-		t_player.turnDirection = 1;
-	else if (keycode == UP_ARROW)
-		t_player.walkDirection = 1;
-	else if (keycode == S_KEY)
-		t_player.walkDirection = -1;
-	else if (keycode == ESC)
+	if (keycode == LEFT_ARROW || keycode == LINUX_A || keycode == WIN_A)
+		player.turnDirection = -1;
+	else if (keycode == RIGHT_ARROW || keycode == LINUX_D || keycode == WIN_D)
+		player.turnDirection = 1;
+	else if (keycode == UP_ARROW || keycode == LINUX_W || keycode == WIN_W)
+		player.walkDirection = 1;
+	else if (keycode == S_KEY || keycode == LINUX_S || keycode == WIN_S)
+		player.walkDirection = -1;
+	else if (keycode == ESC || keycode == LINUX_ESC || keycode == WIN_ESC)
 		safe_exit(game);
 	// renderPlayer(game);
 	// movePlayer(game);
