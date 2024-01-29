@@ -6,52 +6,53 @@
 
 extern t_player player;
 
-void	renderPlayer(t_game *game)
+void	render_player(t_game *game)
 {
-	t_rectangle playerRect = {
-		player.x * MINIMAP_SCALE,
-		player.y * MINIMAP_SCALE,
-		player.width * MINIMAP_SCALE,
-		player.height * MINIMAP_SCALE,
-		0x00E0B0FF
-	};
-	drawRect(game, &playerRect);
+	t_rectangle player_rect;
+	t_line player_line;
 
-	t_line playerLine = {
-		player.x * MINIMAP_SCALE,
-		player.y * MINIMAP_SCALE,
-		(player.x + cos(player.rotationAngle) * 40) * MINIMAP_SCALE,
-		(player.y + sin(player.rotationAngle) * 40) * MINIMAP_SCALE,
-		0x00E0B0FF
-	};
-	drawLine(game, &playerLine);
+	player_rect.x = player.x * MINIMAP_SCALE;
+	player_rect.y = player.y * MINIMAP_SCALE;
+	player_rect.width = player.width * MINIMAP_SCALE;
+	player_rect.height = player.height * MINIMAP_SCALE;
+	player_rect.color =	0x00E0B0FF;
+
+	draw_rect(game, &player_rect);
+
+	player_line.x0 = player.x * MINIMAP_SCALE;
+	player_line.y0 = player.y * MINIMAP_SCALE;
+	player_line.x1 = (player.x + cos(player.rotationAngle) * 40) * MINIMAP_SCALE;
+	player_line.y1 = (player.y + sin(player.rotationAngle) * 40) * MINIMAP_SCALE;
+	player_line.color =	0x00E0B0FF;
+
+	draw_line(game, &player_line);
 }
 
-void drawCeling(t_game *game)
+void draw_ceiling(t_game *game)
 {
-	t_rectangle celing = {
-		.x = 0,
-		.y = 0,
-		.width = WINDOW_WIDTH,
-		.height = WINDOW_HEIGHT / 2,
-		.color = 0x00FAF0E6
-	};
-	drawRect(game, &celing);
+	t_rectangle ceiling;
+	t_rectangle floor;
 
-	t_rectangle floor = {
-		.x = 0,
-		.y = WINDOW_HEIGHT / 2,
-		.width = WINDOW_WIDTH,
-		.height = WINDOW_HEIGHT / 2,
-		.color = 0x008B9E8A
-	};
-	drawRect(game, &floor);
+	ceiling.x = 0;
+	ceiling.y = 0;
+	ceiling.width = WINDOW_WIDTH;
+	ceiling.height = WINDOW_HEIGHT / 2;
+	ceiling.color = 0x00FAF0E6;
 
+	draw_rect(game, &ceiling);
+
+	floor.x = 0;
+	floor.y = WINDOW_HEIGHT / 2;
+	floor.width = WINDOW_WIDTH;
+	floor.height = WINDOW_HEIGHT / 2;
+	floor.color = 0x008B9E8A;
+
+	draw_rect(game, &floor);
 }
 
-void	generate3DProjection(t_game *game)
+void	generate_3d_projection(t_game *game)
 {
-	drawCeling(game);
+	draw_ceiling(game);
 	for (int i = 0; i < NUM_RAYS; i++)
 	{
 		float correctedDistance = rays[i].distance * cos(rays[i].rayAngle - player.rotationAngle);
@@ -61,7 +62,6 @@ void	generate3DProjection(t_game *game)
 
 		int wallTopPixel = (WINDOW_HEIGHT / 2) - (wallStripHeight / 2);
 		wallTopPixel = wallTopPixel < 0 ? 0 : wallTopPixel;
-
 
 		int wallBottomPixel = (WINDOW_HEIGHT / 2) + (wallStripHeight / 2);
 		wallBottomPixel = wallTopPixel > WINDOW_HEIGHT ? WINDOW_HEIGHT : wallBottomPixel;
@@ -82,6 +82,7 @@ void	generate3DProjection(t_game *game)
 			.height = wallStripHeight,
 			.color = _color
 		};
-		drawRect(game, &rect);
+
+		draw_rect(game, &rect);
 	}
 }

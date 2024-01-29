@@ -23,7 +23,7 @@ typedef struct s_ray
 
 extern ray_t	rays[NUM_RAYS];
 
-void	renderRays(t_game *game);
+void	render_rays(t_game *game);
 void	castAllRays(void);
 
 #endif

@@ -27,8 +27,8 @@ typedef struct s_line
 }	t_line;
 
 
-void	drawRect(t_game *game, t_rectangle *rect);
-void	drawLine(t_game *game, t_line *line);
+void	draw_rect(t_game *game, t_rectangle *rect);
+void	draw_line(t_game *game, t_line *line);
 
 
 #endif

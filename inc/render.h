@@ -8,8 +8,8 @@
 # include "cub3d.h"
 
 
-void	drawCeling(t_game *game);
-void	renderPlayer(t_game *game);
-void	generate3DProjection(t_game *game);
+void	draw_ceiling(t_game *game);
+void	render_player(t_game *game);
+void	generate_3d_projection(t_game *game);
 
 #endif

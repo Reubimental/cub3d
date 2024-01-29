@@ -76,10 +76,10 @@ void	render(t_game *game)
 {
 	movePlayer(game);
 	castAllRays();
-	generate3DProjection(game);
-	renderMap(game);
-	renderRays(game);
-	renderPlayer(game);
+	generate_3d_projection(game);
+	render_map(game);
+	render_rays(game);
+	render_player(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->data.img, 0, 0);
 }
 

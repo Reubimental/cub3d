@@ -46,7 +46,7 @@ bool isInsideMap(float x, float y)
 // 	return (false);
 // }
 
-void renderMap(t_game *game)
+void render_map(t_game *game)
 {
 	for (int i = 0; i < MAP_NUM_ROWS; i++)
 	{
@@ -62,7 +62,7 @@ void renderMap(t_game *game)
 				TILE_SIZE * MINIMAP_SCALE, 
 				tileColor
 			};
-			drawRect(game, &mapTileRect);
+			draw_rect(game, &mapTileRect);
 		}
 	}
 }

@@ -189,7 +189,7 @@ void castAllRays(void)
 }
 
 
-void	renderRays(t_game *game)
+void	render_rays(t_game *game)
 {
 	for (int i = 0; i < NUM_RAYS; i++)
 	{
@@ -200,6 +200,6 @@ void	renderRays(t_game *game)
 			rays[i].wallHitY * MINIMAP_SCALE,
 			0x00FFC8D7
 		};
-		drawLine(game, &line);
+		draw_line(game, &line);
 	}
 }
