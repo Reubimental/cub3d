@@ -102,6 +102,6 @@ void	find_intercept(t_wall_hit *orientation, t_axis *axis, float ray_angle, char
 		if (is_ray_facing_down(ray_angle))
 			axis->y_intercept += TILE_SIZE;
 		axis->x_intercept = player.x + (axis->y_intercept
-				- player.y) * tan(ray_angle);
+				- player.y) / tan(ray_angle);
 	}
 }
